@@ -25,9 +25,9 @@ yarn build
 ```
 
 ## How to copy
-  
+
 ```bash
-git clone https://github.com/andrey-kudinov/pictures.art.git
+git clone https://github.com/Albert-SA/ts-pictures.git
 cd windows or open folder in your IDE
 git remote set-url origin your-url
 git push -u origin master
