@@ -10,51 +10,59 @@ const modals = () => {
     closeClickOverlay: boolean; 
   }): void => {
 
-    const triggers: any = document.querySelectorAll(triggersSelector);
-    const modal: any = document.querySelector(modalSelector);
-    const close = document.querySelector(closeSelector)as HTMLButtonElement | null;
-    const windows: any = document.querySelectorAll('[data-modal]');
+    const triggers: NodeListOf<HTMLDivElement> = document.querySelectorAll(triggersSelector);
+    const modal = document.querySelector(modalSelector) as HTMLDivElement;
+    const close = document.querySelector(closeSelector) as HTMLDivElement;
+    const windows: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-modal]');
 
     const closeModal = (): void => {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
     };
-
-    triggers.forEach((trigger: any) => {
-      trigger.addEventListener('click', (e: any) => {
+  
+    triggers?.forEach((trigger: HTMLDivElement) => {
+      trigger?.addEventListener('click', (e) => {
         if (e.target) {
           e.preventDefault();
         }
 
-        windows.forEach((window: any) => {
+        windows?.forEach((window: HTMLDivElement) => {
+          if (window) {
           window.style.display = 'none';
+          }
         });
 
+        if (modal) {
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
-
-        console.log('open modal window')
+        }
 
       });
     });
 
-    document.addEventListener('keydown', (e: any) => {
+    document.addEventListener('keydown', (e) => {
       if (e.code === 'Escape') {
         closeModal();
       }
     });
 
-    close?.addEventListener('click', () => {
-      windows.forEach((window: any) => {
+    close?.addEventListener('click', (): void => {
+      windows?.forEach((window: HTMLDivElement) => {
+        if (window) {
         window.style.display = 'none';
+        }
       });
       closeModal();
     });
 
-    modal.addEventListener('click', (e: any) => {
+    modal?.addEventListener('click', (e) => {
       if (e.target === modal && closeClickOverlay) {
-        windows.forEach((window: any) => {
+        windows?.forEach((window: HTMLDivElement) => {
+          if (window) {
           window.style.display = 'none';
+          }
         });
         closeModal();
       }
