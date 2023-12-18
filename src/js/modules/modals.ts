@@ -12,7 +12,7 @@ const modals = () => {
 
     const triggers: any = document.querySelectorAll(triggersSelector);
     const modal: any = document.querySelector(modalSelector);
-    const close: any = document.querySelector(closeSelector);
+    const close = document.querySelector(closeSelector)as HTMLButtonElement | null;
     const windows: any = document.querySelectorAll('[data-modal]');
 
     const closeModal = (): void => {
@@ -32,10 +32,19 @@ const modals = () => {
 
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
+
+        console.log('open modal window')
+
       });
     });
 
-    close.addEventListener('click', () => {
+    document.addEventListener('keydown', (e: any) => {
+      if (e.code === 'Escape') {
+        closeModal();
+      }
+    });
+
+    close?.addEventListener('click', () => {
       windows.forEach((window: any) => {
         window.style.display = 'none';
       });
@@ -51,11 +60,6 @@ const modals = () => {
       }
     });
 
-    document.addEventListener('keydown', (e: any) => {
-      if (e.code === 'Escape') {
-        closeModal();
-      }
-    });
   };
 
   bindModal({
@@ -64,6 +68,14 @@ const modals = () => {
     closeSelector: '.popup-design .popup_close',
     closeClickOverlay: true,
   });
+
+  bindModal({
+    triggersSelector: '.button-consultation',
+    modalSelector: '.popup-consultation',
+    closeSelector: '.popup-consultation .popup_close',
+    closeClickOverlay: true,
+  });
+
 };
 
 export default modals;
