@@ -98,7 +98,7 @@ const modals = () => {
     window.addEventListener('scroll', () => {
       const showSelector: HTMLDivElement | null = document.querySelector(selector);
       if (!showSelector) return;
-      if (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+      if (!btnPressed && (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight)) {
         showSelector.click();
       };     
     });
