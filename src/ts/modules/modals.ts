@@ -92,7 +92,7 @@ const modals = () => {
     }, time);
   };
 
-  showModalByTime('.popup-design', 5000);
+  // showModalByTime('.popup-design', 5000);
 
   const openByScroll = (selector: string): void => {
     window.addEventListener('scroll', () => {
