@@ -64,26 +64,26 @@ const modals = () => {
     });
   };
 
-  // const showModalByTime = (selector: string, time: number): void => {
-  //   const showSelector: HTMLDivElement | null = document.querySelector(selector);
-  //   if (!showSelector) return;
-  //   setTimeout(() => {
-  //     let display: string;
+  const showModalByTime = (selector: string, time: number): void => {
+    const showSelector: HTMLDivElement | null = document.querySelector(selector);
+    if (!showSelector) return;
+    setTimeout(() => {
+      let display: string = '';
       
-  //     document.querySelectorAll('[data-modal]').forEach(modal => {
-  //       if(getComputedStyle(modal).display !== 'none') {
-  //         display = 'block';
-  //       }
-  //     });
+      document.querySelectorAll('[data-modal]').forEach(modal => {
+        if(getComputedStyle(modal).display !== 'none') {
+          display = 'block';
+        }
+      });
 
-  //     if (!display) {
-  //       showSelector.style.display = 'block';
-  //       document.body.style.overflow = 'hidden';
-  //     }
-  //   }, time);
-  // };
+      if (!display) {
+        showSelector.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+    }, time);
+  };
 
-  // showModalByTime('.popup-design', 5000);
+  showModalByTime('.popup-design', 5000);
 
   bindModal({
     triggersSelector: '.button-design',
