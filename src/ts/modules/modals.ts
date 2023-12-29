@@ -2,7 +2,7 @@ interface IBindModal {
   triggersSelector: string;
   modalSelector: string;
   closeSelector: string;
-  destroy: boolean;
+  destroy?: boolean;
 };
 
 const modals = () => {
@@ -13,7 +13,7 @@ const modals = () => {
     triggersSelector,
     modalSelector,
     closeSelector,
-    destroy = false,
+    destroy,
   }: IBindModal): void => {
 
     const triggers: NodeListOf<HTMLDivElement> = document.querySelectorAll(triggersSelector);
@@ -80,7 +80,8 @@ const modals = () => {
     setTimeout(() => { 
       let display: string = '';
       
-      document.querySelectorAll('[data-modal]').forEach(modal => {
+      const modals = document.querySelectorAll('[data-modal]');
+      modals.forEach(modal => {
         if(getComputedStyle(modal).display !== 'none') {
           display = 'block';
         }
@@ -97,7 +98,8 @@ const modals = () => {
     window.addEventListener('scroll', () => {
       const showSelector: HTMLDivElement | null = document.querySelector(selector);
       if (!showSelector) return;
-      if (!btnPressed && (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight)) {
+      const isScrollAtBottom: boolean = (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight);
+      if (!btnPressed && isScrollAtBottom) {
         showSelector.click();
       };     
     });
