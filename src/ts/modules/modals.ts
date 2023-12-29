@@ -2,15 +2,18 @@ interface IBindModal {
   triggersSelector: string;
   modalSelector: string;
   closeSelector: string;
-  closeClickOverlay: boolean;
+  destroy?: boolean;
 };
 
 const modals = () => {
+
+  let btnPressed: boolean = false;
+
   const bindModal = ({
     triggersSelector,
     modalSelector,
     closeSelector,
-    closeClickOverlay = true,
+    destroy,
   }: IBindModal): void => {
 
     const triggers: NodeListOf<HTMLDivElement> = document.querySelectorAll(triggersSelector);
@@ -30,8 +33,15 @@ const modals = () => {
           e.preventDefault();
         }
 
+        btnPressed = true;
+
+        if (destroy) {
+          trigger.remove();
+        }
+
         windows.forEach((window) => {
           window.style.display = 'none';
+          window.classList.add('animated', 'fadeIn');
         });
 
         if (modal) {
@@ -55,49 +65,66 @@ const modals = () => {
     });
 
     modal?.addEventListener('click', (e) => {
-      if (e.target === modal && closeClickOverlay) {
+      if (e.target === modal) {
         windows.forEach((window) => {
           window.style.display = 'none';
         });
         closeModal();
-      }
+      };
     });
   };
 
-  // const showModalByTime = (selector: string, time: number): void => {
-  //   const showSelector: HTMLDivElement | null = document.querySelector(selector);
-  //   if (!showSelector) return;
-  //   setTimeout(() => {
-  //     let display: string;
+  const showModalByTime = (selector: string, time: number): void => {
+    const showSelector: HTMLDivElement | null = document.querySelector(selector);
+    if (!showSelector) return;
+    setTimeout(() => { 
+      let display: string = '';
       
-  //     document.querySelectorAll('[data-modal]').forEach(modal => {
-  //       if(getComputedStyle(modal).display !== 'none') {
-  //         display = 'block';
-  //       }
-  //     });
+      const modals = document.querySelectorAll('[data-modal]');
+      modals.forEach(modal => {
+        if(getComputedStyle(modal).display !== 'none') {
+          display = 'block';
+        }
+      });
 
-  //     if (!display) {
-  //       showSelector.style.display = 'block';
-  //       document.body.style.overflow = 'hidden';
-  //     }
-  //   }, time);
-  // };
+      if (!display) {
+        showSelector.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+    }, time);
+  };
 
-  // showModalByTime('.popup-design', 5000);
+  const openByScroll = (selector: string): void => {
+    window.addEventListener('scroll', () => {
+      const showSelector: HTMLDivElement | null = document.querySelector(selector);
+      if (!showSelector) return;
+      const isScrollAtBottom: boolean = (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight);
+      if (!btnPressed && isScrollAtBottom) {
+        showSelector.click();
+      };     
+    });
+  };
 
   bindModal({
     triggersSelector: '.button-design',
     modalSelector: '.popup-design',
     closeSelector: '.popup-design .popup-close',
-    closeClickOverlay: true,
+    destroy: false,
   });
-
   bindModal({
     triggersSelector: '.button-consultation',
     modalSelector: '.popup-consultation',
     closeSelector: '.popup-consultation .popup-close',
-    closeClickOverlay: true,
+    destroy: false,
   });
+  bindModal({
+    triggersSelector: '.fixed-gift',
+    modalSelector: '.popup-gift',
+    closeSelector: '.popup-gift .popup-close',
+    destroy: true,
+  });
+  openByScroll('.fixed-gift');
+  showModalByTime('.popup-design', 10000);
 };
 
 export default modals;
