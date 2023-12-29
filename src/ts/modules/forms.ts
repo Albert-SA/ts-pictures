@@ -10,17 +10,12 @@ const forms = () => {
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжемся...',
     failure: 'Что-то пошло не так...',
-    spinner: 'assets/img/spinner.gif',
-    ok: 'assets/img/gift.png',
-    fail: 'assets/img/fail.png',
+    spinner: './src/assets/img/spinner.gif',
+    ok: './src/assets/img/gift.png',
+    fail: './src/assets/img/fail.png',
   };
 
-  const path = {
-      designer: 'assets/server.php',
-      question: 'assets/question.php',
-  };
-
-  const postData = async (url, data) => {
+  const postData = async (url: any, data: any) => {
     let res = await fetch(url, {
       method: 'POST',
       headers: {
@@ -28,7 +23,6 @@ const forms = () => {
       },
       body: data,
     });
-
     return await res.text();
   };
 
@@ -40,6 +34,9 @@ const forms = () => {
   formElems.forEach((form) => {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
+
+      const fileImgInput = form.querySelector('input[type="file"]');
+      console.log(fileImgInput);
 
       let statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
@@ -57,16 +54,17 @@ const forms = () => {
 
       let textMessage = document.createElement('div');
       textMessage.textContent = message.loading;
-      statusMessage.appendChild(textMessage);
+      statusMessage.appendChild(textMessage);   
 
       const formData = new FormData(form);
-      let api;
-      form.closest('.popup-design') ? (api = path.designer) : (api = path.question);
-      console.log(api);
+      // console.log(formData);
+      // let api;
+      // form.closest('.popup-design') ? (api = path.designer) : (api = path.question);
+      // console.log(api);
       const jsonData = JSON.stringify(Object.fromEntries(formData.entries()));
-
-    //   postData('https://simple-server-cumz.onrender.com/api/data', jsonData)
-      postData(api, jsonData)
+      console.log(jsonData);
+      postData('https://server-render-com.onrender.com/api/data', jsonData)
+      // postData(api, jsonData)
         .then((res) => {
           console.log(res);
           statusImg.setAttribute('src', message.ok);
