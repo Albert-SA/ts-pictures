@@ -6,15 +6,15 @@ window.addEventListener('DOMContentLoaded', ():void => {
 
   modals();
   sliders({
-    slides: '.feedback-slider-item',
+    slidesSelector: '.feedback-slider-item',
     dir: 'horizontal', 
     prev: '.main-prev-btn', 
     next: '.main-next-btn',
   });
   sliders({
-    slides: '.main-slider-item',
+    slidesSelector: '.main-slider-item',
     dir: 'vertical', 
-    prev: '', 
-    next: '',
+    prev: null, 
+    next: null,
   });
 });

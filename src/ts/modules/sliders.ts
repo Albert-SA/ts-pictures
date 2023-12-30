@@ -1,36 +1,37 @@
 interface ISliders {
-    slides: string;
+    slidesSelector: string;
     dir: string;
-    prev: string;
-    next: string;
+    prev: any;
+    next: any;
 };
 
 const sliders = ({
-    slides,
+    slidesSelector,
     dir, 
     prev, 
     next,
 }: ISliders): void => {
     let slideIndex: number = 1;
     let paused: number = 1;
+    const INTERVAL_TIME: number = 3000;
     
-    const items: NodeListOf<HTMLElement> = document.querySelectorAll(slides);
+    const slides: NodeListOf<HTMLElement> = document.querySelectorAll(slidesSelector);
 
     const showSlides = (n: number): void => {
-        if (n > items.length) {
+        if (n > slides.length) {
             slideIndex = 1;
         };
 
         if (n < 1) {
-            slideIndex = items.length
+            slideIndex = slides.length
         };
 
-        items.forEach(item => {
-            item.classList.add('animated');
-            item.style.display = 'none';
+        slides.forEach(slide => {
+            slide.classList.add('animated');
+            slide.style.display = 'none';
         });
         
-        items[slideIndex - 1].style.display = 'block';
+        slides[slideIndex - 1].style.display = 'block';
     }
 
     showSlides(slideIndex);
@@ -39,45 +40,43 @@ const sliders = ({
         showSlides(slideIndex += n);
     }
 
-    try {
-        const prevBtn: HTMLElement | null = document.querySelector(prev);
-        const nextBtn: HTMLElement | null = document.querySelector(next);
+    const prevBtn: HTMLElement | null = document.querySelector(prev);
+    const nextBtn: HTMLElement | null = document.querySelector(next);
 
-        prevBtn?.addEventListener('click', () => {
-            plusSlides(+1);
-            items[slideIndex - 1].classList.remove('slideInLeft');
-            items[slideIndex - 1].classList.add('slideInLRight');
-        });
+    prevBtn?.addEventListener('click', () => {
+        plusSlides(+1);
+        slides[slideIndex - 1].classList.remove('slideInLeft');
+        slides[slideIndex - 1].classList.add('slideInLRight');
+    });
 
-        nextBtn?.addEventListener('click', () => {
-            plusSlides(1);
-            items[slideIndex - 1].classList.remove('slideInLRight');
-            items[slideIndex - 1].classList.add('slideInLeft');
-        });
-    } catch(e){}
+    nextBtn?.addEventListener('click', () => {
+        plusSlides(1);
+        slides[slideIndex - 1].classList.remove('slideInLRight');
+        slides[slideIndex - 1].classList.add('slideInLeft');
+    });
 
     const activateAnimation = () => {
         if (dir === 'vertical') {
             paused = setInterval(() => {
                 plusSlides(1);
-                items[slideIndex - 1].classList.add('slideInDown');
-            }, 3000);
+                slides[slideIndex - 1].classList.add('slideInDown');
+            }, INTERVAL_TIME);
         } else {
             paused = setInterval(() => {
                 plusSlides(1);
-                items[slideIndex - 1].classList.remove('slideInLRight');
-                items[slideIndex - 1].classList.add('slideInLeft');
-            }, 3000);
+                slides[slideIndex - 1].classList.remove('slideInLRight');
+                slides[slideIndex - 1].classList.add('slideInLeft');
+            }, INTERVAL_TIME);
         }
     };
 
     activateAnimation();
     
-    items[0].parentNode?.addEventListener('mouseenter', () => {
+    slides[0].parentNode?.addEventListener('mouseenter', () => {
         clearInterval(paused);
     });
 
-    items[0].parentNode?.addEventListener('mouseleave', () => {
+    slides[0].parentNode?.addEventListener('mouseleave', () => {
         activateAnimation();
     });
 
