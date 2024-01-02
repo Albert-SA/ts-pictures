@@ -4,7 +4,7 @@ const showMoreStyles = (trigger: string, wrapper: any) => {
     const btnCard: HTMLDivElement | null = document.querySelector(trigger);
 
     btnCard?.addEventListener('click', function(this: any) {
-        getResource('./src/assets/db.json')
+        getResource('./public/assets/db.json')
             .then(res => createCards(res.styles))
             .catch(error => console.log(error));
 
