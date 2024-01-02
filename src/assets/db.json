@@ -1,22 +1,22 @@
 {
     "styles": [
         {
-            "src": "./public/src/assets/img/styles-5.jpg",
+            "src": "./public/img/styles-5.jpg",
             "title": "Пастелью",
             "link": "#pastel"
         },
         {
-            "src": "./public/src/assets/img/styles-6.jpg",
+            "src": "./public/img/styles-6.jpg",
             "title": "Поп-арт",
             "link": "#popart"
         },
         {
-            "src": "./public/src/assets/img/styles-7.png",
+            "src": "./public/img/styles-7.png",
             "title": "Фотомозаика",
             "link": "#mozaika"
         },
         {
-            "src": "./public/src/assets/img/styles-8.jpg",
+            "src": "./public/img/styles-8.jpg",
             "title": "Шарж",
             "link": "#sharj"
         }
