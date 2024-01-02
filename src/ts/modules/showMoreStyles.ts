@@ -1,18 +1,43 @@
-const showMoreStyles = (trigger: string, styles: string) => {
-    const cards: NodeListOf<HTMLElement> = document.querySelectorAll(styles);
+import {getResource} from '../services/requests';
+
+const showMoreStyles = (trigger: string, wrapper: any) => {
     const btnCard: HTMLDivElement | null = document.querySelector(trigger);
-    
-    cards.forEach(card => {
-        card.classList.add('animated', 'fadeInOut');
+
+    btnCard?.addEventListener('click', function(this: any) {
+        getResource('./src/assets/db.json')
+            .then(res => createCards(res.styles))
+            .catch(error => console.log(error));
+
+        this.remove();
     });
 
-    btnCard?.addEventListener('click', () => {
-        cards.forEach(card => {
-            card.classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs');
-            card.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
+    interface ICards {
+        src: string;
+        title: string;
+        link: string;
+    }
+    const createCards = (response: any) => {
+        response.forEach(({
+            src, 
+            title, 
+            link
+        }: ICards) => {
+            let card: HTMLDivElement | null = document.createElement('div');
+
+            card.classList.add('animated', 'fadeInOut', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
+
+            card.innerHTML = `
+                <div class=styles-block>
+                    <img src=${src} alt>
+                    <h4>${title}</h4>
+                    <a href=${link}>Подробнее</a>
+                </div>
+            `;
+            
+            if (!wrapper) return;
+            document.querySelector(wrapper).appendChild(card);
         });
-        btnCard.remove();
-    })
+    }
 };
 
 export default showMoreStyles;

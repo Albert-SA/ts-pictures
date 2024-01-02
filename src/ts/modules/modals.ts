@@ -22,7 +22,7 @@ const modals = () => {
     const windows: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-modal]');
 
     const closeModal = (): void => {
-      if (!modal) return
+      if (!modal) return;
       modal.style.display = 'none';
       document.body.style.overflow = '';
     };
