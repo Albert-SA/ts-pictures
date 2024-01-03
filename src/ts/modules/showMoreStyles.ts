@@ -4,8 +4,8 @@ const showMoreStyles = (trigger: string, wrapper: any) => {
     const btnCard: HTMLDivElement | null = document.querySelector(trigger);
 
     btnCard?.addEventListener('click', function(this: any) {
-        getResource('./public/assets/db.json')
-            .then(res => createCards(res.styles))
+        getResource('https://6594307b1493b011606a1a49.mockapi.io/api/v1/styles')
+            .then(res => createCards(res))
             .catch(error => console.log(error));
 
         this.remove();
