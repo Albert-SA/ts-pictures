@@ -7,11 +7,11 @@ interface ICalc {
 };
 
 const calc = ( {size, material, option, promocode, price}: ICalc) => {
-    const sizeBlock: HTMLElement | null = document.querySelector(size);
-    const materialBlock: HTMLElement | null = document.querySelector(material);
-    const optionBlock: HTMLElement | null = document.querySelector(option);
-    let promocodeBlock: any = document.querySelector(promocode);
-    let priceBlock: any = document.querySelector(price);
+    const sizeBlock: any = document.querySelector(size);
+    const materialBlock: any = document.querySelector(material);
+    const optionBlock: any = document.querySelector(option);
+    const promocodeBlock: any = document.querySelector(promocode);
+    const priceBlock: any = document.querySelector(price);
 
     let sum: number = 0;
     const calcSum = () => {
@@ -20,7 +20,7 @@ const calc = ( {size, material, option, promocode, price}: ICalc) => {
 
         if ((sizeBlock.value == '') || (materialBlock.value == '')) {
             priceBlock.textContent = 'ВВЕДИТЕ НЕДОСТАЮЩИЙ РАЗМЕР ЛИБО МАТЕРИАЛ';
-        } else if (promocodeBlock.value == 'IWANTPOPART') {
+        } else if (promocodeBlock.value === 'IWANTPOPART') {
             priceBlock.textContent = Math.round(sum * 0.7);
         } else {
             priceBlock.textContent = sum;
