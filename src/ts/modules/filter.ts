@@ -1,7 +1,7 @@
 const filter = () => {
     const menu: HTMLElement | null = document.querySelector('.portfolio-menu');
     if (!menu) return;
-    // const itemsMenu = menu.querySelectorAll('li');
+    const itemsMenu: NodeListOf<HTMLElement> = menu.querySelectorAll('li');
     const btnAll: HTMLElement | null = menu.querySelector('.all');
     const btnLovers: HTMLElement | null = menu.querySelector('.lovers');
     const btnChef: HTMLElement | null = menu.querySelector('.chef');
@@ -66,6 +66,15 @@ const filter = () => {
     btnGrandad?.addEventListener('click', () => {
         typeFilter();
     });
+
+    menu.addEventListener('click', (e) => {
+        const target: any = e.target;
+
+        if (target && target.tagName == 'LI') {
+            itemsMenu.forEach(btnMenu => btnMenu.classList.remove('active'));
+            target.classList.add('active');
+        }
+    })
 };
 
 export default filter;
