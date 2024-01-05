@@ -5,7 +5,7 @@ const showMoreStyles = (trigger: string, wrapper: any) => {
 
     btnCard?.addEventListener('click', function(this: HTMLButtonElement) {
         // getResource('https://6594307b1493b011606a1a49.mockapi.io/api/v1/styles')
-        getResource('./src/assets/db.json')
+        getResource('/assets/db.json')
             .then(res => createCards(res))
             .catch(error => console.log(error));
 
