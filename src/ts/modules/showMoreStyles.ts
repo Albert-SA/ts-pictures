@@ -12,18 +12,18 @@ const showMoreStyles = (trigger: string, wrapper: any) => {
         this.remove();
     });
 
-    interface ICards {
+    interface ICard {
         src: string;
         title: string;
         link: string;
     }
-    const createCards = (response: any) => {
+    const createCards = (response: ICard[]) => {
         response.forEach(({
             src, 
             title, 
             link
-        }: ICards) => {
-            let card: HTMLDivElement | null = document.createElement('div');
+        }: ICard) => {
+            const card: HTMLDivElement | null = document.createElement('div');
 
             card.classList.add('animated', 'fadeInOut', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
 
@@ -35,7 +35,7 @@ const showMoreStyles = (trigger: string, wrapper: any) => {
                 </div>
             `;
             
-            // if (!wrapper) return;
+            if (!wrapper) return;
             document.querySelector(wrapper).append(card);
         });
     }

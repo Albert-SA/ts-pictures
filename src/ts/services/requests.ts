@@ -1,5 +1,5 @@
-const postData = async (url: string, data: string) => {
-    let res = await fetch(url, {
+export const postData = async (url: string, data: string) => {
+    const res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -9,8 +9,8 @@ const postData = async (url: string, data: string) => {
     return await res.text();
 };
 
-const getResource = async (url: string) => {
-    let res = await fetch(url);
+export const getResource = async (url: string) => {
+    const res = await fetch(url);
 
     if (!res.ok) {
         throw new Error(`Could not fetch ${url}, status: ${res.status}`);
@@ -18,5 +18,3 @@ const getResource = async (url: string) => {
 
     return await res.json();
 };
-
-export {postData, getResource};
