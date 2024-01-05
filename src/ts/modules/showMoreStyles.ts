@@ -3,8 +3,9 @@ import {getResource} from '../services/requests';
 const showMoreStyles = (trigger: string, wrapper: any) => {
     const btnCard: HTMLDivElement | null = document.querySelector(trigger);
 
-    btnCard?.addEventListener('click', function(this: any) {
-        getResource('https://6594307b1493b011606a1a49.mockapi.io/api/v1/styles')
+    btnCard?.addEventListener('click', function(this: HTMLButtonElement) {
+        // getResource('https://6594307b1493b011606a1a49.mockapi.io/api/v1/styles')
+        getResource('./src/assets/db.json')
             .then(res => createCards(res))
             .catch(error => console.log(error));
 
@@ -34,8 +35,8 @@ const showMoreStyles = (trigger: string, wrapper: any) => {
                 </div>
             `;
             
-            if (!wrapper) return;
-            document.querySelector(wrapper).appendChild(card);
+            // if (!wrapper) return;
+            document.querySelector(wrapper).append(card);
         });
     }
 };
