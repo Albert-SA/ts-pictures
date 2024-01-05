@@ -18,9 +18,9 @@ const calc = ( {size, material, option, promocode, price}: ICalc) => {
         if (!sizeBlock && !materialBlock && !optionBlock) return;
         sum = Math.round((+sizeBlock.value) * (+materialBlock.value) + (+optionBlock.value));
 
-        if ((sizeBlock.value == '') || (materialBlock.value == '')) {
+        if (!sizeBlock.value || !materialBlock.value) {
             priceBlock.textContent = 'ВВЕДИТЕ НЕДОСТАЮЩИЙ РАЗМЕР ЛИБО МАТЕРИАЛ';
-        } else if (promocodeBlock.value === 'IWANTPOPART') {
+        } else if (promocodeBlock.value.toUpperCase() === 'IWANTPOPART') {
             priceBlock.textContent = Math.round(sum * 0.7);
         } else {
             priceBlock.textContent = sum;
