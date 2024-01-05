@@ -1,6 +1,6 @@
 import {getResource} from '../services/requests';
 
-const showMoreStyles = (trigger: string, wrapper: any) => {
+const showMoreStyles = (trigger: string, wrapper: string) => {
     const btnCard: HTMLDivElement | null = document.querySelector(trigger);
 
     btnCard?.addEventListener('click', function(this: HTMLButtonElement) {
@@ -35,8 +35,9 @@ const showMoreStyles = (trigger: string, wrapper: any) => {
                 </div>
             `;
             
-            if (!wrapper) return;
-            document.querySelector(wrapper).append(card);
+            const appendCard: HTMLDivElement | null = document.querySelector(wrapper);
+            appendCard?.append(card);
+            
         });
     }
 };
