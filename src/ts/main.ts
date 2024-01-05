@@ -4,6 +4,7 @@ import mask from './modules/mask';
 import checkTextInputs from './modules/checkTextInputs';
 import showMoreStyles from './modules/showMoreStyles';
 import calc from './modules/calc';
+import accordion from './modules/accordion';
 
 window.addEventListener('DOMContentLoaded', ():void => {
   'use strict';
@@ -32,4 +33,5 @@ window.addEventListener('DOMContentLoaded', ():void => {
     promocode: '.promocode',
     price: '.calc-price',
   });
+  accordion('.accordion-heading', '.accordion-block');
 });
