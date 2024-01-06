@@ -7,7 +7,7 @@ const forms = (): void => {
     success: 'Спасибо! Скоро мы с вами свяжемся...',
     failure: 'Что-то пошло не так...',
     spinner: '/assets/img/spinner.gif',
-    ok: '/assets/img/gift.png',
+    ok: '/assets/img/ok.png',
     fail: '/assets/img/fail.png',
   };
 
@@ -28,12 +28,21 @@ const forms = (): void => {
     });
   };
 
+  const getBase64 = (element: any) => {
+    const file = element.files[0];
+    const reader = new FileReader();
+    reader.onloadend = function() {
+      console.log(reader.result)
+    }
+    reader.readAsDataURL(file);
+  };
+
   formElems.forEach((form) => {
     form?.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      const fileImgInput: Element | null = form.querySelector('input[type="file"]');
-      console.log(fileImgInput);
+      const fileImgInput: HTMLInputElement | null = form.querySelector('input[type="file"]');
+      const imgInputBase64 = getBase64(fileImgInput);
 
       let statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
@@ -44,7 +53,7 @@ const forms = (): void => {
 
       form.classList.add('animated', 'fadeOutUp');
       setTimeout(() => {
-        form.remove();
+        form.style.display='none';
       }, 400);
 
       let statusImg = document.createElement('img');
@@ -57,10 +66,7 @@ const forms = (): void => {
       statusMessage.appendChild(textMessage);   
 
       const formData = new FormData(form);
-      // console.log(formData);
-      // let api;
-      // form.closest('.popup-design') ? (api = path.designer) : (api = path.question);
-      // console.log(api);
+      // formData.append('upload', imgInputBase64);
       const jsonData = JSON.stringify(Object.fromEntries(formData.entries()));
       console.log(jsonData);
       postData('https://server-render-com.onrender.com/api/data', jsonData)
