@@ -43,6 +43,7 @@ const forms = (): void => {
 
       const fileImgInput: HTMLInputElement | null = form.querySelector('input[type="file"]');
       const imgInputBase64 = getBase64(fileImgInput);
+      console.log(imgInputBase64);
 
       let statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
