@@ -1,8 +1,9 @@
 const pictureSize = (imgSelector: string) => {
-    const blocks = document.querySelectorAll(imgSelector);
+    const blocks: NodeListOf<HTMLUListElement> = document.querySelectorAll(imgSelector);
 
-    function showImg (block: any) {
-        const img = block.querySelector('img');
+    const showImg = (block: HTMLUListElement) => {
+        const img: HTMLImageElement | null = block.querySelector('img');
+        if (!img) return;
         img.src = img.src.slice(0, -4) + '-1.png';
         const paragraphs: NodeListOf<HTMLElement> = block.querySelectorAll('p:not(.sizes-hit)');
         paragraphs.forEach(p => {
@@ -10,8 +11,9 @@ const pictureSize = (imgSelector: string) => {
         });
     }
 
-    function hideImg (block: any) {
-        const img = block.querySelector('img');
+    const hideImg = (block: HTMLUListElement) => {
+        const img: HTMLImageElement | null = block.querySelector('img');
+        if (!img) return;
         img.src = img.src.slice(0, -6) + '.png';
         const paragraphs: NodeListOf<HTMLElement> = block.querySelectorAll('p:not(.sizes-hit)');
         paragraphs.forEach(p => {
@@ -20,10 +22,10 @@ const pictureSize = (imgSelector: string) => {
     }
 
     blocks.forEach(block => {
-        block.addEventListener('mouseover', () => {
+        block?.addEventListener('mouseover', () => {
             showImg(block);
         });
-        block.addEventListener('mouseout', () => {
+        block?.addEventListener('mouseout', () => {
             hideImg(block);
         });
     });
