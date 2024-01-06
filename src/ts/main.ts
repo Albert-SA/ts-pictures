@@ -4,6 +4,7 @@ import mask from './modules/mask';
 import checkTextInputs from './modules/checkTextInputs';
 import showMoreStyles from './modules/showMoreStyles';
 import calc from './modules/calc';
+import burger from './modules/burger';
 
 window.addEventListener('DOMContentLoaded', ():void => {
   'use strict';
@@ -32,4 +33,5 @@ window.addEventListener('DOMContentLoaded', ():void => {
     promocode: '.promocode',
     price: '.calc-price',
   });
+  burger('.burger-menu', '.burger');
 });
