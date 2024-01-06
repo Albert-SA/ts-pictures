@@ -1,18 +1,14 @@
-// import checkNumInputs from './checkNumInputs';
-
-const forms = () => {
-  const formElems = document.querySelectorAll('form');
-  const inputs = document.querySelectorAll('input');
-
-//   checkNumInputs('input[name="user_phone"]');
+const forms = (): void => {
+  const formElems: NodeListOf<HTMLFormElement> = document.querySelectorAll('form');
+  const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('input');
 
   const message = {
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжемся...',
     failure: 'Что-то пошло не так...',
-    spinner: './src/assets/img/spinner.gif',
-    ok: './src/assets/img/gift.png',
-    fail: './src/assets/img/fail.png',
+    spinner: '/assets/img/spinner.gif',
+    ok: '/assets/img/gift.png',
+    fail: '/assets/img/fail.png',
   };
 
   const postData = async (url: any, data: any) => {
@@ -31,16 +27,20 @@ const forms = () => {
       input.value = '';
     });
   };
+
   formElems.forEach((form) => {
-    form.addEventListener('submit', (event) => {
+    form?.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      const fileImgInput = form.querySelector('input[type="file"]');
+      const fileImgInput: Element | null = form.querySelector('input[type="file"]');
       console.log(fileImgInput);
 
       let statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
-      form.parentNode.appendChild(statusMessage);
+      if (!form) return;
+      const formParent = form.parentNode;
+      if (!formParent) return;
+      formParent.appendChild(statusMessage);
 
       form.classList.add('animated', 'fadeOutUp');
       setTimeout(() => {
@@ -64,7 +64,6 @@ const forms = () => {
       const jsonData = JSON.stringify(Object.fromEntries(formData.entries()));
       console.log(jsonData);
       postData('https://server-render-com.onrender.com/api/data', jsonData)
-      // postData(api, jsonData)
         .then((res) => {
           console.log(res);
           statusImg.setAttribute('src', message.ok);
