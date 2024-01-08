@@ -8,12 +8,11 @@ const accordion = (triggersSelector: string, itemsSelector: string) => {
 
     btns.forEach(btn => {
         btn?.addEventListener('click', function() {
-            if (!this.classList.contains('active')) {
+            if (this.classList.contains('active')) return;
                 btns.forEach(btn => {
                     btn.classList.remove('active', 'active-style');
                 });
                 this.classList.add('active', 'active-style');
-            }
         });
     });
 };
