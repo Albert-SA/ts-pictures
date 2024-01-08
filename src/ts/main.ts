@@ -3,8 +3,10 @@ import sliders from './modules/sliders';
 import mask from './modules/mask';
 import checkTextInputs from './modules/checkTextInputs';
 import showMoreStyles from './modules/showMoreStyles';
+import pictureSize from './modules/pictureSize';
 import calc from './modules/calc';
 import burger from './modules/burger';
+import accordion from './modules/accordion';
 
 window.addEventListener('DOMContentLoaded', ():void => {
   modals();
@@ -23,6 +25,8 @@ window.addEventListener('DOMContentLoaded', ():void => {
   mask('[name = "phone"]');
   checkTextInputs('[name = "name"]');
   checkTextInputs('[name = "message"]');
+  showMoreStyles('.button-styles', '.styles-2');
+  pictureSize('.sizes-block');
   showMoreStyles('.button-styles', '#styles .row');
   calc({
     size: '#size',
@@ -32,4 +36,5 @@ window.addEventListener('DOMContentLoaded', ():void => {
     price: '.calc-price',
   });
   burger('.burger-menu', '.burger');
+  accordion('.accordion-heading', '.accordion-block');
 });
