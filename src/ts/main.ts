@@ -6,8 +6,6 @@ import showMoreStyles from './modules/showMoreStyles';
 import filter from './modules/filter';
 
 window.addEventListener('DOMContentLoaded', ():void => {
-  'use strict';
-
   modals();
   sliders({
     slidesSelector: '.feedback-slider-item',

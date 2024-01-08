@@ -48,7 +48,7 @@ const filter = () => {
     menu.addEventListener('click', (e) => {
         const target: any = e.target;
 
-        if (target && target.tagName == 'LI') {
+        if (target?.tagName === 'LI') {
             itemsMenu.forEach(btnMenu => btnMenu.classList.remove('active'));
             target.classList.add('active');
         }
