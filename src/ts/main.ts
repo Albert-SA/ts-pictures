@@ -4,6 +4,7 @@ import mask from './modules/mask';
 import checkTextInputs from './modules/checkTextInputs';
 import showMoreStyles from './modules/showMoreStyles';
 import pictureSize from './modules/pictureSize';
+import calc from './modules/calc';
 
 window.addEventListener('DOMContentLoaded', ():void => {
   'use strict';
@@ -26,4 +27,12 @@ window.addEventListener('DOMContentLoaded', ():void => {
   checkTextInputs('[name = "message"]');
   showMoreStyles('.button-styles', '.styles-2');
   pictureSize('.sizes-block');
+  showMoreStyles('.button-styles', '#styles .row');
+  calc({
+    size: '#size',
+    material: '#material',
+    option: '#options',
+    promocode: '.promocode',
+    price: '.calc-price',
+  });
 });
