@@ -5,11 +5,10 @@ import checkTextInputs from './modules/checkTextInputs';
 import showMoreStyles from './modules/showMoreStyles';
 import pictureSize from './modules/pictureSize';
 import calc from './modules/calc';
+import burger from './modules/burger';
 import accordion from './modules/accordion';
 
 window.addEventListener('DOMContentLoaded', ():void => {
-  'use strict';
-
   modals();
   sliders({
     slidesSelector: '.feedback-slider-item',
@@ -36,5 +35,6 @@ window.addEventListener('DOMContentLoaded', ():void => {
     promocode: '.promocode',
     price: '.calc-price',
   });
+  burger('.burger-menu', '.burger');
   accordion('.accordion-heading', '.accordion-block');
 });
