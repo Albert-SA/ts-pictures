@@ -4,6 +4,10 @@ import mask from './modules/mask';
 import checkTextInputs from './modules/checkTextInputs';
 import showMoreStyles from './modules/showMoreStyles';
 import filter from './modules/filter';
+import pictureSize from './modules/pictureSize';
+import calc from './modules/calc';
+import burger from './modules/burger';
+import accordion from './modules/accordion';
 
 window.addEventListener('DOMContentLoaded', ():void => {
   modals();
@@ -24,4 +28,15 @@ window.addEventListener('DOMContentLoaded', ():void => {
   checkTextInputs('[name = "message"]');
   showMoreStyles('.button-styles', '.styles-2');
   filter();
+  pictureSize('.sizes-block');
+  showMoreStyles('.button-styles', '#styles .row');
+  calc({
+    size: '#size',
+    material: '#material',
+    option: '#options',
+    promocode: '.promocode',
+    price: '.calc-price',
+  });
+  burger('.burger-menu', '.burger');
+  accordion('.accordion-heading', '.accordion-block');
 });
