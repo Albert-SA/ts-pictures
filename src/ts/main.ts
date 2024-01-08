@@ -7,8 +7,6 @@ import calc from './modules/calc';
 import burger from './modules/burger';
 
 window.addEventListener('DOMContentLoaded', ():void => {
-  'use strict';
-
   modals();
   sliders({
     slidesSelector: '.feedback-slider-item',
